@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 TINCID (Régis Pirard)
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+
+    <record id='hr_contract_view_form' model='ir.ui.view'>
+        <field name="name">hr.contract.form (in l10n_be_payroll_base)</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='information']" position="after">
+                <page
+                    string="Salary (Belgium)"
+                    name="l10n_be_salary"
+                    attrs="{'invisible': [('country_code', '!=', 'BE')]}"
+                >
+                    <group col="2">
+                        <group col="1" name="l10n_be_salary_col1">
+                            <group string="Benefits in kind (other)">
+                                <field name="bik_be" />
+                            </group>
+                        </group>
+                        <group col="2" name="l10n_be_salary_col2">
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
