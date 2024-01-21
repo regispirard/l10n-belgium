@@ -4,7 +4,7 @@
 from odoo import fields, models
 
 
-class FleetVehicleBikBe(models.Model):
+class FleetVehicleBik(models.Model):
 
     _name = "fleet.vehicle.bik"
     _description = "Benefit in kind for the vehicle"

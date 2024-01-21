@@ -17,8 +17,10 @@
     ],
     "data": [
         "security/ir.model.access.csv",
-        "data/hr_payroll_structure.xml",
         "views/fleet_vehicle.xml",
+        "views/fleet_vehicle_bik_co2.xml",
+        "data/hr_payroll_structure.xml",
+        "data/fleet_vehicle_bik_co2.xml",
     ],
     "application": True,
 }

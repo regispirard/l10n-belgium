@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2023 TINCID (Régis Pirard)
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+
+
+  <!-- Benefit in kind CO2 reference -->
+
+  <record id="2012_diesel" model="fleet.vehicle.bik.co2">
+    <field name="year">2012</field>
+    <field name="fiscal_fuel_type">diesel</field>
+    <field name="ref_co2">95</field>
+  </record>
+
+</odoo>

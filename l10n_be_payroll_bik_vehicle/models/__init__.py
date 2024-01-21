@@ -3,3 +3,4 @@
 
 from . import fleet_vehicle
 from . import fleet_vehicle_bik
+from . import fleet_vehicle_bik_co2
