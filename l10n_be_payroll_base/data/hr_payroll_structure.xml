@@ -7,13 +7,13 @@
 
   <record id="l10n_be_category_remuneration" model="hr.salary.rule.category.template">
     <field name="name">Remunerations</field>
-    <field name="code">REMUN</field>
+    <field name="code">BE_REMUN</field>
     <field name="note">Remunerations of all kinds</field>
   </record>
 
   <record id="l10n_be_category_bik" model="hr.salary.rule.category.template">
     <field name="name">Benefits in kind</field>
-    <field name="code">BIK</field>
+    <field name="code">BE_BIK</field>
     <field name="note">All benefits in kind</field>
   </record>
 
@@ -22,7 +22,7 @@
         model="hr.salary.rule.category.template"
     >
     <field name="name">Subject to social security</field>
-    <field name="code">ONSSSOUMIS</field>
+    <field name="code">BE_ONSSSOUMIS</field>
     <field name="note">Gross amount subject to social security contributions</field>
   </record>
 
@@ -31,7 +31,7 @@
         model="hr.salary.rule.category.template"
     >
     <field name="name">Social security contributions</field>
-    <field name="code">ONSSPERS</field>
+    <field name="code">BE_ONSSPERS</field>
     <field name="note">Amount of personal social security contributions</field>
   </record>
 
@@ -40,52 +40,49 @@
         model="hr.salary.rule.category.template"
     >
     <field name="name">Subject to income tax</field>
-    <field name="code">IMPOSABLE</field>
+    <field name="code">BE_IMPOSABLE</field>
     <field name="note">Taxable amount subject to income taxes</field>
   </record>
 
   <record id="l10n_be_category_taxes" model="hr.salary.rule.category.template">
     <field name="name">Income taxes</field>
-    <field name="code">TAXES</field>
+    <field name="code">BE_TAXES</field>
     <field name="note">Amount of income taxes</field>
   </record>
 
   <record id="l10n_be_other_net" model="hr.salary.rule.category.template">
     <field name="name">Divers Net</field>
-    <field name="code">DIVERSNET</field>
+    <field name="code">BE_DIVERSNET</field>
     <field name="note">Divers net amounts</field>
   </record>
 
   <record id="l10n_be_category_deduction" model="hr.salary.rule.category.template">
     <field name="name">Deductions</field>
-    <field name="code">DEDUCTIONS</field>
+    <field name="code">BE_DEDUCTIONS</field>
     <field name="note">All net deductions</field>
   </record>
 
-  <record
-        id="l10n_be_category_net_remuneration"
-        model="hr.salary.rule.category.template"
-    >
+  <record id="l10n_be_category_net_tot" model="hr.salary.rule.category.template">
     <field name="name">Net remunerations</field>
-    <field name="code">NETTOT</field>
+    <field name="code">BE_NETTOT</field>
     <field name="note">All net remunerations</field>
   </record>
 
   <record id="l10n_be_category_recovery" model="hr.salary.rule.category.template">
     <field name="name">Recovery</field>
-    <field name="code">RECOVERY</field>
+    <field name="code">BE_RECOVERY</field>
     <field name="note">Amounts to recover</field>
   </record>
 
   <record id="l10n_be_category_to_pay" model="hr.salary.rule.category.template">
     <field name="name">To pay</field>
-    <field name="code">TOPAY</field>
+    <field name="code">BE_TOPAY</field>
     <field name="note">Amount to pay</field>
   </record>
 
   <record id="l10n_be_category_employer_cost" model="hr.salary.rule.category.template">
     <field name="name">Employer costs</field>
-    <field name="code">EMPLOYERCOST</field>
+    <field name="code">BE_EMPLOYERCOST</field>
     <field
             name="note"
         >Amounts in charge of the employer (for accounting purpose)</field>
@@ -165,7 +162,7 @@
   <record id="l10n_be_rule_salary" model="hr.salary.rule.template">
     <field name="name">Salary</field>
     <field name="category_id" ref="l10n_be_category_remuneration" />
-    <field name="code">SALARY</field>
+    <field name="code">BE_SALARY</field>
     <field name="sequence" eval="100" />
     <field name="active">True</field>
     <field name="appears_on_payslip">True</field>
@@ -177,9 +174,9 @@
 
   <record id="l10n_be_rule_bik" model="hr.salary.rule.template">
     <field name="name">Benefit in kind (other)</field>
-    <field name="category_id" ref="l10n_be_category_remuneration" />
-    <field name="code">BIK</field>
-    <field name="sequence" eval="200" />
+    <field name="category_id" ref="l10n_be_category_bik" />
+    <field name="code">BE_BIK</field>
+    <field name="sequence" eval="400" />
     <field name="active">True</field>
     <field name="appears_on_payslip">True</field>
     <field name="note">Benefit in kind - amount</field>
@@ -191,8 +188,8 @@
   <record id="l10n_be_rule_subject_social_security" model="hr.salary.rule.template">
     <field name="name">Subject to social security</field>
     <field name="category_id" ref="l10n_be_category_suject_social_security" />
-    <field name="code">SOUMIS_ONSS</field>
-    <field name="sequence" eval="500" />
+    <field name="code">BE_SOUMIS_ONSS</field>
+    <field name="sequence" eval="600" />
     <field name="active">True</field>
     <field name="appears_on_payslip">True</field>
     <field name="note">Total amount subject to social security contribution</field>
@@ -200,7 +197,52 @@
     <field name="amount_select">code</field>
     <field
             name="amount_python_compute"
-        >result = categories.REMUN + categories.BIK</field>
+        >result = categories.BE_REMUN + categories.BE_BIK</field>
+  </record>
+
+  <record id="l10n_be_rule_taxable_remuneration" model="hr.salary.rule.template">
+    <field name="name">Taxable Remuneration</field>
+    <field name="category_id" ref="l10n_be_category_taxable_remuneration" />
+    <field name="code">BE_IMPOSABLE</field>
+    <field name="sequence" eval="700" />
+    <field name="active">True</field>
+    <field name="appears_on_payslip">True</field>
+    <field name="note">Total amount subject to income taxes</field>
+    <field name="condition_select">none</field>
+    <field name="amount_select">code</field>
+    <field
+            name="amount_python_compute"
+        >result = categories.BE_ONSSSOUMIS + categories.BE_ONSPERS</field>
+  </record>
+
+  <record id="l10n_be_rule_net_tot" model="hr.salary.rule.template">
+    <field name="name">Net</field>
+    <field name="category_id" ref="l10n_be_category_net_tot" />
+    <field name="code">BE_NET</field>
+    <field name="sequence" eval="1000" />
+    <field name="active">True</field>
+    <field name="appears_on_payslip">True</field>
+    <field name="note">Total amount subject to income taxes</field>
+    <field name="condition_select">none</field>
+    <field name="amount_select">code</field>
+    <field
+            name="amount_python_compute"
+        >result = categories.BE_IMPOSABLE + categories.BE_TAXES + categories.BE_DIVERSNET + categories.BE_DEDUCTIONS </field>
+  </record>
+
+  <record id="l10n_be_rule_to_pay" model="hr.salary.rule.template">
+    <field name="name">To Pay</field>
+    <field name="category_id" ref="l10n_be_category_to_pay" />
+    <field name="code">BE_APAYER</field>
+    <field name="sequence" eval="1200" />
+    <field name="active">True</field>
+    <field name="appears_on_payslip">True</field>
+    <field name="note">Total to pay</field>
+    <field name="condition_select">none</field>
+    <field name="amount_select">code</field>
+    <field
+            name="amount_python_compute"
+        >result = categories.BE_NETTOT + categories.BE_TAXES + categories.BE_RECOVERY </field>
   </record>
 
 
@@ -211,12 +253,28 @@
     <field name="name">Belgium: Belgian payroll structure</field>
     <field
             name="rule_ids"
-            eval="[(6, 0, [
-            ref('l10n_be_rule_salary'),
-            ref('l10n_be_rule_bik'),
-            ref('l10n_be_rule_subject_social_security')
-            ])]"
+            eval="[
+            (4, ref('l10n_be_rule_salary')),
+            (4, ref('l10n_be_rule_bik')),
+            (4, ref('l10n_be_rule_subject_social_security')),
+            (4, ref('l10n_be_rule_taxable_remuneration')),
+            (4, ref('l10n_be_rule_net_tot')),
+            (4, ref('l10n_be_rule_to_pay')),
+            ]"
         />
   </record>
+
+
+<!-- Load template for Belgian Companies -->
+
+  <function
+        model="res.company"
+        name="load_country_salary_structures_company"
+        eval="(
+            [ref('base.main_company')],
+            ref('structure_l10n_be_payroll_base_1'),
+            ref('base.be'),
+            )"
+    />
 
 </odoo>

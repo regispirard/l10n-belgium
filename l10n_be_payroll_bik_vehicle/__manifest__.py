@@ -13,9 +13,12 @@
         "hr_fleet",
         "payroll",
         "payroll_account",
+        "l10n_be_payroll_base",
     ],
     "data": [
         "security/ir.model.access.csv",
+        "data/hr_payroll_structure.xml",
+        "views/fleet_vehicle.xml",
     ],
     "application": True,
 }

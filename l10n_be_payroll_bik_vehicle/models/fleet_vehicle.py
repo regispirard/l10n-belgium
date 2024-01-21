@@ -19,9 +19,10 @@ class FleetVehicle(models.Model):
         readonly=True,
         store=True,
     )
-    is_bik_computed = fields.Boolean(
+    is_bik_be_computed = fields.Boolean(
         string="Vehicle BIK computed",
-        default=False,
+        compute="_compute_bik_ids",
+        store=True,
     )
 
     def _get_degressive_ranges(self):
@@ -213,18 +214,21 @@ class FleetVehicle(models.Model):
                 or not vehicle.fuel_type
                 or vehicle.country_code != "BE"
             ):
-                vehicle.is_bik_computed = False
+                # Will remove all previous computations
+                vehicle.bik_be_ids = [(5, 0)]
+                vehicle.is_bik_be_computed = False
                 return
 
+            # Remove all previous computations
             bik_items = [(5, 0)]  # Will unlink all records
 
-            # BIK will decrease in time
+            # BIK will decrease in time - we get the periods
             degressive_periods = vehicle._get_degressive_periods(vehicle)
 
-            # CO2 rate change every year and depends on fuel_type
+            # CO2 rate change every year and depends on fuel_type - get periods
             co2_reference = vehicle._get_co2_reference(vehicle.fuel_type)
 
-            # TO DO : mix degressive and co2 periods
+            # Mix degressive and co2 periods
             periods = vehicle._get_degressive_co2_periods(
                 degressive_periods, co2_reference
             )
@@ -246,6 +250,5 @@ class FleetVehicle(models.Model):
                 bik_items.append((0, 0, bik_data))
 
             vehicle.bik_be_ids = bik_items
-            vehicle.is_bik_computed = True
-
+            vehicle.is_bik_be_computed = True
         return

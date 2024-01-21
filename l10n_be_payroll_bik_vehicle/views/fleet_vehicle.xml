@@ -8,7 +8,47 @@
         <field name="model">fleet.vehicle</field>
         <field name="inherit_id" ref="fleet.fleet_vehicle_view_form" />
         <field name="arch" type="xml">
-
+            <xpath expr="//header" position="after">
+                <div
+                    class="alert alert-info"
+                    role="alert"
+                    style="height: 40px; margin-bottom:0px;"
+                    attrs="{'invisible':['|',('country_code', '!=', 'BE'), ('is_bik_be_computed', '=', True)]}"
+                >
+                    Information are missing to compute the benefit in kind for this car, please check acquisition date, car value, co2, and fuel_type.<strong
+                    />.
+                </div>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page
+                    string="Benefit in kind (BE)"
+                    name="vehicle_bik_be"
+                    attrs="{'invisible': [('country_code', '!=', 'BE')]}"
+                >
+                    <group>
+                        <field name="is_bik_be_computed" />
+                    </group>
+                    <group>
+                        <field
+                            name="bik_be_ids"
+                            mode="tree"
+                            options="{'no_open': True, 'no_create': True}"
+                        >
+                            <tree
+                                name="vehicle_bik_be"
+                                default_order="date_from"
+                                decoration-bf="date_to &gt; current_date and date_from &lt; current_date"
+                                decoration-success="date_to &gt; current_date and date_from &lt; current_date"
+                                decoration-muted="date_to &lt; current_date or date_from &gt; current_date"
+                            >
+                                <field name="date_from" />
+                                <field name="date_to" />
+                                <field name="amount" />
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+            </xpath>
         </field>
     </record>
 

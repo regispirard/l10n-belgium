@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2023 TINCID (Régis Pirard)
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+
+
+  <!-- Salary Rules templates -->
+
+  <record id="l10n_be_rule_bik_vehicle" model="hr.salary.rule.template">
+    <field name="name">BIK Vehicle</field>
+    <field name="category_id" ref="l10n_be_payroll_base.l10n_be_category_bik" />
+    <field name="code">BE_BIK_VEHICLE</field>
+    <field name="sequence" eval="410" />
+    <field name="active">True</field>
+    <field name="appears_on_payslip">True</field>
+    <field name="note">Benefit in kind : Vehicle (see fleet)</field>
+    <field name="condition_select">none</field>
+    <field name="amount_select">code</field>
+    <field name="amount_python_compute">
+bik_cars = 0.00
+for car in employee.car_ids:
+  bik_base = car.bik_be_ids.filtered_domain([
+    ('date_from', '&lt;=', payslip.date_to),
+    ('date_to', '&lt;=', payslip.date_from)
+    ])
+  bik_day = bik_base.amount / 365
+  bik_month = bik_day * 31
+  bik_cars += bik_month
+result = bik_cars
+      </field>
+  </record>
+
+
+<!-- Salary Structure templates -->
+
+  <record
+        id="l10n_be_payroll_base.structure_l10n_be_payroll_base_1"
+        model="hr.payroll.structure.template"
+    >
+    <field name="rule_ids" eval="[(4, ref('l10n_be_rule_bik_vehicle'))]" />
+  </record>
+
+
+
+<!-- Load template for Belgian Companies -->
+
+  <function
+        model="res.company"
+        name="load_country_salary_structures_company"
+        eval="(
+            [ref('base.main_company')],
+            ref('l10n_be_payroll_base.structure_l10n_be_payroll_base_1'),
+            ref('base.be'),
+            )"
+    />
+
+</odoo>
