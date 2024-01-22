@@ -11,5 +11,120 @@
     <field name="fiscal_fuel_type">diesel</field>
     <field name="ref_co2">95</field>
   </record>
+  <record id="2013_diesel" model="fleet.vehicle.bik.co2">
+    <field name="year">2013</field>
+    <field name="fiscal_fuel_type">diesel</field>
+    <field name="ref_co2">95</field>
+  </record>
+  <record id="2014_diesel" model="fleet.vehicle.bik.co2">
+    <field name="year">2014</field>
+    <field name="fiscal_fuel_type">diesel</field>
+    <field name="ref_co2">93</field>
+  </record>
+  <record id="2015_diesel" model="fleet.vehicle.bik.co2">
+    <field name="year">2015</field>
+    <field name="fiscal_fuel_type">diesel</field>
+    <field name="ref_co2">91</field>
+  </record>
+  <record id="2016_diesel" model="fleet.vehicle.bik.co2">
+    <field name="year">2016</field>
+    <field name="fiscal_fuel_type">diesel</field>
+    <field name="ref_co2">89</field>
+  </record>
+  <record id="2017_diesel" model="fleet.vehicle.bik.co2">
+    <field name="year">2017</field>
+    <field name="fiscal_fuel_type">diesel</field>
+    <field name="ref_co2">87</field>
+  </record>
+  <record id="2018_diesel" model="fleet.vehicle.bik.co2">
+    <field name="year">2018</field>
+    <field name="fiscal_fuel_type">diesel</field>
+    <field name="ref_co2">86</field>
+  </record>
+  <record id="2019_diesel" model="fleet.vehicle.bik.co2">
+    <field name="year">2019</field>
+    <field name="fiscal_fuel_type">diesel</field>
+    <field name="ref_co2">88</field>
+  </record>
+  <record id="2020_diesel" model="fleet.vehicle.bik.co2">
+    <field name="year">2020</field>
+    <field name="fiscal_fuel_type">diesel</field>
+    <field name="ref_co2">97</field>
+  </record>
+  <record id="2021_diesel" model="fleet.vehicle.bik.co2">
+    <field name="year">2021</field>
+    <field name="fiscal_fuel_type">diesel</field>
+    <field name="ref_co2">84</field>
+  </record>
+  <record id="2022_diesel" model="fleet.vehicle.bik.co2">
+    <field name="year">2022</field>
+    <field name="fiscal_fuel_type">diesel</field>
+    <field name="ref_co2">75</field>
+  </record>
+  <record id="2023_diesel" model="fleet.vehicle.bik.co2">
+    <field name="year">2023</field>
+    <field name="fiscal_fuel_type">diesel</field>
+    <field name="ref_co2">67</field>
+  </record>
+  <record id="2012_gasoline" model="fleet.vehicle.bik.co2">
+    <field name="year">2012</field>
+    <field name="fiscal_fuel_type">gasoline</field>
+    <field name="ref_co2">115</field>
+  </record>
+  <record id="2013_gasoline" model="fleet.vehicle.bik.co2">
+    <field name="year">2013</field>
+    <field name="fiscal_fuel_type">gasoline</field>
+    <field name="ref_co2">116</field>
+  </record>
+  <record id="2014_gasoline" model="fleet.vehicle.bik.co2">
+    <field name="year">2014</field>
+    <field name="fiscal_fuel_type">gasoline</field>
+    <field name="ref_co2">112</field>
+  </record>
+  <record id="2015_gasoline" model="fleet.vehicle.bik.co2">
+    <field name="year">2015</field>
+    <field name="fiscal_fuel_type">gasoline</field>
+    <field name="ref_co2">110</field>
+  </record>
+  <record id="2016_gasoline" model="fleet.vehicle.bik.co2">
+    <field name="year">2016</field>
+    <field name="fiscal_fuel_type">gasoline</field>
+    <field name="ref_co2">107</field>
+  </record>
+  <record id="2017_gasoline" model="fleet.vehicle.bik.co2">
+    <field name="year">2017</field>
+    <field name="fiscal_fuel_type">gasoline</field>
+    <field name="ref_co2">105</field>
+  </record>
+  <record id="2018_gasoline" model="fleet.vehicle.bik.co2">
+    <field name="year">2018</field>
+    <field name="fiscal_fuel_type">gasoline</field>
+    <field name="ref_co2">105</field>
+  </record>
+  <record id="2019_gasoline" model="fleet.vehicle.bik.co2">
+    <field name="year">2019</field>
+    <field name="fiscal_fuel_type">gasoline</field>
+    <field name="ref_co2">107</field>
+  </record>
+  <record id="2020_gasoline" model="fleet.vehicle.bik.co2">
+    <field name="year">2020</field>
+    <field name="fiscal_fuel_type">gasoline</field>
+    <field name="ref_co2">111</field>
+  </record>
+  <record id="2021_gasoline" model="fleet.vehicle.bik.co2">
+    <field name="year">2021</field>
+    <field name="fiscal_fuel_type">gasoline</field>
+    <field name="ref_co2">102</field>
+  </record>
+  <record id="2022_gasoline" model="fleet.vehicle.bik.co2">
+    <field name="year">2022</field>
+    <field name="fiscal_fuel_type">gasoline</field>
+    <field name="ref_co2">91</field>
+  </record>
+  <record id="2023_gasoline" model="fleet.vehicle.bik.co2">
+    <field name="year">2023</field>
+    <field name="fiscal_fuel_type">gasoline</field>
+    <field name="ref_co2">82</field>
+  </record>
 
 </odoo>
