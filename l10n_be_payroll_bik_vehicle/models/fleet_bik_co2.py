@@ -4,10 +4,18 @@
 from odoo import api, fields, models
 
 
-class FleetVehicleBikCo2(models.Model):
+class FleetBikCo2(models.Model):
 
-    _name = "fleet.vehicle.bik.co2"
+    _name = "fleet.bik.co2"
     _description = "CO2 reference to compute vehicle benefit in kind"
+
+    _sql_constraints = [
+        (
+            "year_fuel_type_unique",
+            "unique(year, fiscal_fuel_type)",
+            "You can only define the CO2 for a specific fuel type and year once.",
+        ),
+    ]
 
     year = fields.Integer()
     fiscal_fuel_type = fields.Selection(

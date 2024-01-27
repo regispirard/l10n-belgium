@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2023 TINCID (Régis Pirard)
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+
+
+  <!-- Benefit in kind CO2 reference -->
+
+  <record id="degressive_perdiod_1" model="fleet.bik.degressive">
+    <field name="month_from">0</field>
+    <field name="month_to">12</field>
+    <field name="degressive_percentage">1</field>
+  </record>
+  <record id="degressive_perdiod_2" model="fleet.bik.degressive">
+    <field name="month_from">13</field>
+    <field name="month_to">24</field>
+    <field name="degressive_percentage">0.94</field>
+  </record>
+  <record id="degressive_perdiod_3" model="fleet.bik.degressive">
+    <field name="month_from">25</field>
+    <field name="month_to">36</field>
+    <field name="degressive_percentage">0.88</field>
+  </record>
+  <record id="degressive_perdiod_4" model="fleet.bik.degressive">
+    <field name="month_from">37</field>
+    <field name="month_to">48</field>
+    <field name="degressive_percentage">0.82</field>
+  </record>
+  <record id="degressive_perdiod_5" model="fleet.bik.degressive">
+    <field name="month_from">49</field>
+    <field name="month_to">60</field>
+    <field name="degressive_percentage">0.76</field>
+  </record>
+  <record id="degressive_perdiod_6" model="fleet.bik.degressive">
+    <field name="month_from">61</field>
+    <field name="degressive_percentage">0.70</field>
+  </record>
+
+
+
+
+            (12, 1),
+            (24, 0.94),
+            (36, 0.88),
+            (48, 0.82),
+            (60, 0.76),
+            (60+, 0.70),
+
+
+</odoo>

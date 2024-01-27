@@ -18,9 +18,14 @@
     "data": [
         "security/ir.model.access.csv",
         "views/fleet_vehicle.xml",
-        "views/fleet_vehicle_bik_co2.xml",
+        "views/fleet_bik_co2.xml",
+        "views/fleet_bik_degressive.xml",
+        "views/fleet_bik_min.xml",
+        "views/menuitem.xml",
         "data/hr_payroll_structure.xml",
-        "data/fleet_vehicle_bik_co2.xml",
+        "data/fleet_bik_co2.xml",
+        "data/fleet_bik_degressive.xml",
+        "data/fleet_bik_min.xml",
     ],
     "application": True,
 }

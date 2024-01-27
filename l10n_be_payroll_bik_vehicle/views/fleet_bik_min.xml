@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2023 TINCID SRL, Régis Pirard
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+
+    <record id='fleet_bik_min_configuration_view_tree' model='ir.ui.view'>
+        <field name="name">fleet.bik.min.tree</field>
+        <field name="model">fleet.bik.min</field>
+        <field name="arch" type="xml">
+            <tree name="fleet_bik_min" editable="bottom">
+                <field name="year" />
+                <field name="amount" />
+
+            </tree>
+        </field>
+    </record>
+
+</odoo>

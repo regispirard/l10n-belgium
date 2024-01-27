@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2023 TINCID (Régis Pirard)
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+
+
+  <!-- Benefit in kind CO2 reference -->
+
+  <record id="2013_bik_min" model="fleet.bik.min">
+    <field name="year">2013</field>
+    <field name="amount">1200</field>
+  </record>
+  <record id="2014_bik_min" model="fleet.bik.min">
+    <field name="year">2014</field>
+    <field name="amount">1230</field>
+  </record>
+  <record id="2015_bik_min" model="fleet.bik.min">
+    <field name="year">2015</field>
+    <field name="amount">1250</field>
+  </record>
+  <record id="2016_bik_min" model="fleet.bik.min">
+    <field name="year">2016</field>
+    <field name="amount">1250</field>
+  </record>
+  <record id="2017_bik_min" model="fleet.bik.min">
+    <field name="year">2017</field>
+    <field name="amount">1260</field>
+  </record>
+  <record id="2018_bik_min" model="fleet.bik.min">
+    <field name="year">2018</field>
+    <field name="amount">1280</field>
+  </record>
+  <record id="2019_bik_min" model="fleet.bik.min">
+    <field name="year">2019</field>
+    <field name="amount">1310</field>
+  </record>
+  <record id="2020_bik_min" model="fleet.bik.min">
+    <field name="year">2020</field>
+    <field name="amount">1340</field>
+  </record>
+  <record id="2021_bik_min" model="fleet.bik.min">
+    <field name="year">2021</field>
+    <field name="amount">1360</field>
+  </record>
+  <record id="2022_bik_min" model="fleet.bik.min">
+    <field name="year">2022</field>
+    <field name="amount">1370</field>
+  </record>
+  <record id="2023_bik_min" model="fleet.bik.min">
+    <field name="year">2023</field>
+    <field name="amount">1400</field>
+  </record>
+  <record id="2024_bik_min" model="fleet.bik.min">
+    <field name="year">2024</field>
+    <field name="amount">1540</field>
+  </record>
+
+</odoo>

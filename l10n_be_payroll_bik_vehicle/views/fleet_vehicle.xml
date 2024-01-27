@@ -10,7 +10,7 @@
         <field name="arch" type="xml">
             <xpath expr="//header" position="after">
                 <div
-                    class="alert alert-info"
+                    class="alert alert-warning mb-0"
                     role="alert"
                     style="height: 40px; margin-bottom:0px;"
                     attrs="{'invisible':['|',('country_code', '!=', 'BE'), ('is_bik_be_computed', '=', True)]}"

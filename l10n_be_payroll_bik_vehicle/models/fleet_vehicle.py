@@ -26,32 +26,26 @@ class FleetVehicle(models.Model):
     )
 
     def _get_degressive_ranges(self):
-        ranges = [
-            # (before age in month, devaluation percentage)
-            # None = over 60 month
-            (12, 1),
-            (24, 0.94),
-            (36, 0.88),
-            (48, 0.82),
-            (60, 0.76),
-            (None, 0.70),
-        ]
+        degressive_model = self.env["fleet.bik.degressive"]
+        ranges = degressive_model.search([])
         return ranges
 
     def _get_degressive_periods(self, vehicle):
         # Compute degressive periods based on vehicle acquisition date
         # BIK decreases at each vehicle anniversary
-        ranges = vehicle._get_degressive_ranges()
+        d_ranges = vehicle._get_degressive_ranges()
         periods = []
         start_date = datetime(
             vehicle.acquisition_date.year, vehicle.acquisition_date.month, 1
         )
-        range_start_date = start_date
 
-        for age, percentage in ranges:
-            if age is not None:
+        for d_range in d_ranges:
+            range_start_date = start_date + relativedelta(months=d_range.month_from - 1)
+            if d_range.month_to:
                 range_end_date = (
-                    start_date + relativedelta(months=age) - relativedelta(days=1)
+                    start_date
+                    + relativedelta(months=d_range.month_to)
+                    - relativedelta(days=1)
                 )
             else:
                 range_end_date = False
@@ -59,18 +53,16 @@ class FleetVehicle(models.Model):
                 (
                     range_start_date,
                     range_end_date,
-                    percentage,
+                    d_range.degressive_percentage,
                 )
             )
 
-            if range_end_date:
-                range_start_date = range_end_date + relativedelta(days=1)
         return periods
 
     def _get_degressive_co2_periods(
         self, degressive_periods, fiscal_fuel_type, vehicle_co2
     ):
-        co2_model = self.env["fleet.vehicle.bik.co2"]
+        co2_model = self.env["fleet.bik.co2"]
         periods = []
         for deg_start_date, deg_end_date, deg_percentage in degressive_periods:
             if not deg_start_date:
@@ -120,6 +112,12 @@ class FleetVehicle(models.Model):
         )
         return periods
 
+    def _get_bik_min_year(self):
+        min_list = {}
+        for bkm in self.env["fleet.bik.min"].search([]):
+            min_list[bkm.year] = bkm.amount
+        return min_list
+
     @api.depends(
         "acquisition_date",
         "country_id",
@@ -142,7 +140,7 @@ class FleetVehicle(models.Model):
                 vehicle.is_bik_be_computed = False
                 return
 
-            co2_model = self.env["fleet.vehicle.bik.co2"]
+            co2_model = self.env["fleet.bik.co2"]
 
             # Remove all previous computations
             bik_items = [(5, 0)]  # Will unlink all records
@@ -161,10 +159,19 @@ class FleetVehicle(models.Model):
                 degressive_periods, fiscal_fuel_type, vehicle.co2
             )
 
+            # Get minimal BIK amount per year
+            bik_min_year = vehicle._get_bik_min_year()
+
             # Compute BIK for each period
             for start_date, end_date, percentage, co2_rate in periods_data:
 
                 amount = vehicle.car_value * percentage * (6 / 7) * co2_rate
+
+                # Apply minimal BIK amount
+                min_amount = bik_min_year.get(start_date.year)
+                if min_amount:
+                    if amount < min_amount:
+                        amount = min_amount
 
                 bik_data = {
                     "vehicle_id": vehicle.id,
