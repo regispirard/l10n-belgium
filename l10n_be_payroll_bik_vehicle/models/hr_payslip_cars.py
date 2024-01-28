@@ -3,8 +3,7 @@
 
 import calendar
 
-from odoo import _, api, fields, models
-from odoo.exceptions import UserError
+from odoo import api, fields, models
 
 
 class HrPayslipCar(models.Model):
@@ -62,9 +61,8 @@ class HrPayslipCar(models.Model):
                 [("date_from", "<=", car.period_to), ("date_to", ">=", car.period_from)]
             )
             if len(bik_yearly_car) != 1:
-                raise UserError(
-                    _("Cannot compute vehicle BIK amount found for this period")
-                )
+                car.bik_amount = 0
+                return
 
             car.bik_yearly = bik_yearly_car.amount
 
