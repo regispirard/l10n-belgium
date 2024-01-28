@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2023 TINCID SRL, Régis Pirard
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+
+    <record id="hr_payslip_view_form" model="ir.ui.view">
+        <field name="name">hr.payslip.form (in payrol_details)</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="payroll_details.hr_payslip_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='payslip_details']" position="inside">
+                <separator name="bik_car" string="Company car" />
+                <field name="bik_car_ids">
+                    <tree editable="bottom">
+                        <field name="payslip_id" invisible="1" />
+                        <field name="car_id" />
+                        <field name="period_from" />
+                        <field name="period_to" />
+                        <field name="period_days" />
+                        <field name="bik_yearly" />
+                        <field name="bik_amount" />
+                    </tree>
+                </field>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

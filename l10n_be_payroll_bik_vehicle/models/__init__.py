@@ -6,3 +6,5 @@ from . import fleet_vehicle
 from . import fleet_vehicle_bik
 from . import fleet_bik_co2
 from . import fleet_bik_degressive
+from . import hr_payslip_cars
+from . import hr_payslip

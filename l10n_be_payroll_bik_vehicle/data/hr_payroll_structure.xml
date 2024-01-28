@@ -14,20 +14,14 @@
     <field name="active">True</field>
     <field name="appears_on_payslip">True</field>
     <field name="note">Benefit in kind : Vehicle (see fleet)</field>
-    <field name="condition_select">none</field>
+    <field name="condition_select">python</field>
+    <field name="condition_python">result = payslip.bik_car_ids</field>
     <field name="amount_select">code</field>
-    <field name="amount_python_compute">
-bik_cars = 0.00
-for car in employee.car_ids:
-  bik_base = car.bik_be_ids.filtered_domain([
-    ('date_from', '&lt;=', payslip.date_to),
-    ('date_to', '&lt;=', payslip.date_from)
-    ])
-  bik_day = bik_base.amount / 365
-  bik_month = bik_day * 31
-  bik_cars += bik_month
+    <field name="amount_python_compute">bik_cars = 0.00
+for car in payslip.bik_car_ids:
+  bik_cars += car.bik_amount
 result = bik_cars
-      </field>
+    </field>
   </record>
 
 

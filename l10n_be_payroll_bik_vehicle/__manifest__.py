@@ -12,7 +12,7 @@
         "hr",
         "hr_fleet",
         "payroll",
-        "payroll_account",
+        "payroll_details",
         "l10n_be_payroll_base",
     ],
     "data": [
@@ -22,6 +22,7 @@
         "views/fleet_bik_degressive.xml",
         "views/fleet_bik_min.xml",
         "views/menuitem.xml",
+        "views/hr_payslip.xml",
         "data/hr_payroll_structure.xml",
         "data/fleet_bik_co2.xml",
         "data/fleet_bik_degressive.xml",
