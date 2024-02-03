@@ -15,6 +15,15 @@
                     attrs="{'invisible': [('country_code', '!=', 'BE')]}"
                 >
                     <group col="2">
+                        <group col="1" name="l10n_be_social_security_col1">
+                            <group string="Social Security (ONSS)">
+                                <field name="onssbe_type" />
+                            </group>
+                        </group>
+                        <group col="2" name="l10n_be_social_security_col2">
+                        </group>
+                    </group>
+                    <group col="2">
                         <group col="1" name="l10n_be_salary_col1">
                             <group string="Benefits in kind (other)">
                                 <field name="bik_be" />

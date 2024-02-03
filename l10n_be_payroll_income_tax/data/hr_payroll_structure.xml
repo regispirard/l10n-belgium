@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2023 TINCID (Régis Pirard)
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+
+
+  <!-- Salary Rules templates -->
+
+    <record id="l10n_be_rule_social_security_info" model="hr.salary.rule.template">
+      <field name="name">Estimated Social Security (info)</field>
+      <field name="category_id" ref="l10n_be_payroll_base.l10n_be_category_info" />
+      <field name="code">BE_ONSS_EST</field>
+      <field name="sequence" eval="2000" />
+      <field name="active">True</field>
+      <field name="appears_on_payslip">True</field>
+      <field name="note">Estimated Social Security</field>
+      <field name="condition_select">python</field>
+      <field name="condition_python">result = (payslip.onssbe_type == "leader")</field>
+      <field name="amount_select">code</field>
+      <field
+            name="amount_python_compute"
+        >result = -payslip.get_estimated_social_security_leader(payslip.date_from.year, categories.BE_ONSSSOUMIS)</field>
+    </record>
+
+    <record id="l10n_be_rule_income_tax" model="hr.salary.rule.template">
+      <field name="name">Income Tax (base)</field>
+      <field name="category_id" ref="l10n_be_payroll_base.l10n_be_category_taxes" />
+      <field name="code">BE_INCOME_TAX</field>
+      <field name="sequence" eval="770" />
+      <field name="active">True</field>
+      <field name="appears_on_payslip">True</field>
+      <field name="note">Income tax (base)</field>
+      <field name="condition_select">none</field>
+      <field name="amount_select">code</field>
+      <field
+            name="amount_python_compute"
+        >result = payslip.get_income_tax(categories.BE_IMPOSABLE, payslip.date_from.year, payslip.taxbe_type, payslip.taxbe_spouse_without_rev)</field>
+    </record>
+
+
+  <!-- Salary Structure templates -->
+
+  <record
+        id="l10n_be_payroll_base.structure_l10n_be_payroll_base_1"
+        model="hr.payroll.structure.template"
+    >
+    <field
+            name="rule_ids"
+            eval="[
+            (4, ref('l10n_be_rule_social_security_info')),
+            (4, ref('l10n_be_rule_income_tax')),
+            ]"
+        />
+  </record>
+
+
+
+<!-- Load template for Belgian Companies -->
+
+  <function
+        model="res.company"
+        name="load_country_salary_structures_company"
+        eval="(
+            [ref('base.main_company')],
+            ref('l10n_be_payroll_base.structure_l10n_be_payroll_base_1'),
+            ref('base.be'),
+            )"
+    />
+
+</odoo>

@@ -66,6 +66,11 @@
     <field name="fiscal_fuel_type">diesel</field>
     <field name="ref_co2">67</field>
   </record>
+  <record id="2024_diesel" model="fleet.bik.co2">
+    <field name="year">2024</field>
+    <field name="fiscal_fuel_type">diesel</field>
+    <field name="ref_co2">65</field>
+  </record>
   <record id="2012_gasoline" model="fleet.bik.co2">
     <field name="year">2012</field>
     <field name="fiscal_fuel_type">gasoline</field>
@@ -125,6 +130,11 @@
     <field name="year">2023</field>
     <field name="fiscal_fuel_type">gasoline</field>
     <field name="ref_co2">82</field>
+  </record>
+  <record id="2024_gasoline" model="fleet.bik.co2">
+    <field name="year">2024</field>
+    <field name="fiscal_fuel_type">gasoline</field>
+    <field name="ref_co2">78</field>
   </record>
 
 </odoo>

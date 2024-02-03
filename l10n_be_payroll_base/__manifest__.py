@@ -16,6 +16,7 @@
     "data": [
         "data/hr_payroll_structure.xml",
         "views/hr_contract.xml",
+        "views/hr_payslip.xml",
     ],
     "application": True,
 }

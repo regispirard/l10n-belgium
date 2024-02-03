@@ -5,6 +5,7 @@ from odoo import api, fields, models
 
 
 class HrPayslip(models.Model):
+    _name = "hr.payslip"
     _inherit = "hr.payslip"
 
     bik_car_ids = fields.One2many(
@@ -15,8 +16,10 @@ class HrPayslip(models.Model):
 
     @api.onchange("employee_id", "date_from", "date_to")
     def onchange_employee(self):
-        super(HrPayslip, self).onchange_employee()
+        res = super(HrPayslip, self).onchange_employee()
         for payslip in self:
+            if payslip.state == "done" or payslip.contract_id.country_code != "BE":
+                continue
             car_assignations = self.env["fleet.vehicle.assignation.log"].search(
                 [
                     ("driver_employee_id", "!=", False),
@@ -53,5 +56,5 @@ class HrPayslip(models.Model):
 
                 bik_car_ids.append((0, 0, bik_car))
 
-        payslip.bik_car_ids = bik_car_ids
-        return
+            payslip.bik_car_ids = bik_car_ids
+        return res

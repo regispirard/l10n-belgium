@@ -9,6 +9,7 @@ from odoo import api, fields, models
 
 
 class FleetVehicle(models.Model):
+    _name = "fleet.vehicle"
     _inherit = "fleet.vehicle"
 
     bik_be_ids = fields.One2many(

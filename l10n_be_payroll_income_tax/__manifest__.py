@@ -11,8 +11,13 @@
     "depends": [
         "hr",
         "payroll",
-        "payroll_account",
+        "payroll_details",
+        "l10n_be_payroll_base",
     ],
-    "data": [],
+    "data": [
+        "views/hr_payslip.xml",
+        "views/hr_contract.xml",
+        "data/hr_payroll_structure.xml",
+    ],
     "application": True,
 }

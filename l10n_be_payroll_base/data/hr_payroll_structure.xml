@@ -88,6 +88,12 @@
         >Amounts in charge of the employer (for accounting purpose)</field>
   </record>
 
+    <record id="l10n_be_category_info" model="hr.salary.rule.category.template">
+    <field name="name">Informations</field>
+    <field name="code">BE_INFO</field>
+    <field name="note">Informations</field>
+  </record>
+
 <!-- Contribution registers -->
 
   <record id="l10n_be_register_fiscal_team_partner_general" model="res.partner">
@@ -180,7 +186,8 @@
     <field name="active">True</field>
     <field name="appears_on_payslip">True</field>
     <field name="note">Benefit in kind - amount</field>
-    <field name="condition_select">none</field>
+    <field name="condition_select">python</field>
+    <field name="condition_python">result = contract.bik_be</field>
     <field name="amount_select">code</field>
     <field name="amount_python_compute">result = contract.bik_be</field>
   </record>
@@ -200,6 +207,22 @@
         >result = categories.BE_REMUN + categories.BE_BIK</field>
   </record>
 
+  <record id="l10n_be_rule_social_security_pers" model="hr.salary.rule.template">
+    <field name="name">Social Security</field>
+    <field name="category_id" ref="l10n_be_category_social_security_contribution" />
+    <field name="code">BE_ONSS_PERS</field>
+    <field name="sequence" eval="690" />
+    <field name="active">True</field>
+    <field name="appears_on_payslip">True</field>
+    <field name="note">Social Security</field>
+    <field name="condition_select">python</field>
+    <field name="condition_python">result = (payslip.onssbe_type == "employee")</field>
+    <field name="amount_select">code</field>
+    <field
+            name="amount_python_compute"
+        >result = -(categories.BE_ONSSSOUMIS * 0.1307) </field>
+  </record>
+
   <record id="l10n_be_rule_taxable_remuneration" model="hr.salary.rule.template">
     <field name="name">Taxable Remuneration</field>
     <field name="category_id" ref="l10n_be_category_taxable_remuneration" />
@@ -212,8 +235,24 @@
     <field name="amount_select">code</field>
     <field
             name="amount_python_compute"
-        >result = categories.BE_ONSSSOUMIS + categories.BE_ONSPERS</field>
+        >result = categories.BE_ONSSSOUMIS + categories.BE_ONSSPERS</field>
   </record>
+
+  <record id="l10n_be_rule_bik_recup" model="hr.salary.rule.template">
+    <field name="name">Benefit in kind Recuperation</field>
+    <field name="category_id" ref="l10n_be_category_deduction" />
+    <field name="code">BE_BIK_REC</field>
+    <field name="sequence" eval="800" />
+    <field name="active">True</field>
+    <field name="appears_on_payslip">True</field>
+    <field name="note">Total amount subject to income taxes</field>
+    <field name="condition_select">python</field>
+    <field name="condition_python">result = categories.BE_BIK</field>
+    <field name="amount_select">code</field>
+    <field name="amount_python_compute">result = -categories.BE_BIK</field>
+  </record>
+
+
 
   <record id="l10n_be_rule_net_tot" model="hr.salary.rule.template">
     <field name="name">Net</field>
@@ -257,7 +296,9 @@
             (4, ref('l10n_be_rule_salary')),
             (4, ref('l10n_be_rule_bik')),
             (4, ref('l10n_be_rule_subject_social_security')),
+            (4, ref('l10n_be_rule_social_security_pers')),
             (4, ref('l10n_be_rule_taxable_remuneration')),
+            (4, ref('l10n_be_rule_bik_recup')),
             (4, ref('l10n_be_rule_net_tot')),
             (4, ref('l10n_be_rule_to_pay')),
             ]"

@@ -4,7 +4,7 @@
 <odoo>
 
     <record id='fleet_vehicle_view_form' model='ir.ui.view'>
-        <field name="name">fleet.vehicle.form</field>
+        <field name="name">fleet.vehicle.form (in l10n_be_payroll_bik_vehicle)</field>
         <field name="model">fleet.vehicle</field>
         <field name="inherit_id" ref="fleet.fleet_vehicle_view_form" />
         <field name="arch" type="xml">
