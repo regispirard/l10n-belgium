@@ -28,5 +28,5 @@
         "data/fleet_bik_degressive.xml",
         "data/fleet_bik_min.xml",
     ],
-    "application": True,
+    "application": False,
 }

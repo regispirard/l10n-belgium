@@ -34,7 +34,7 @@
       <field name="amount_select">code</field>
       <field
             name="amount_python_compute"
-        >result = payslip.get_income_tax(categories.BE_IMPOSABLE, payslip.date_from.year, payslip.taxbe_type, payslip.taxbe_spouse_without_rev)</field>
+        >result = - payslip.get_income_tax(categories.BE_IMPOSABLE, payslip.date_from.year, payslip.taxbe_type, payslip.taxbe_spouse_without_rev, payslip.taxbe_children, payslip.taxbe_children_hand, payslip.taxbe_isolated, payslip.taxbe_isolated_par, payslip.taxbe_handicap, payslip.taxbe_dependant_65, payslip.taxbe_person_65, payslip.taxbe_person_other, payslip.taxbe_spouse_low_rev, payslip.taxbe_spouse_low_pens)</field>
     </record>
 
 

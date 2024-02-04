@@ -19,5 +19,5 @@
         "views/hr_contract.xml",
         "data/hr_payroll_structure.xml",
     ],
-    "application": True,
+    "application": False,
 }

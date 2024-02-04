@@ -1,4 +1,4 @@
-# Copyright 2023 TINCID SRL, Régis Pirard
+# Copyright 2023 TINCID SRL, Régis Pirard, Fabio Lucarelli
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import datetime
@@ -52,6 +52,31 @@ class HrTaxBeMixin(models.AbstractModel):
                 de façon permanente pour au moins 66 p.c.""",
     )
 
+    taxbe_children_hand = fields.Integer(
+        string="Dependent Childrens (With Handicap)",
+        groups="hr.group_hr_user",
+        help="""L'enfant handicapé à charge est compté pour deux.
+        Par "enfant handicapé", il faut entendre :
+            - l'enfant atteint à 66 p.c. au moins d'une insuffisance ou diminution de
+            capacité physique ou psychique du chef d'une ou de plusieurs affections ;
+            - l'enfant dont il est établi, indépendamment de son âge, qu'en raison de
+            faits survenus et constatés avant l'âge de 65 ans :
+                a) soit son état physique ou psychique a réduit sa capacité de gain à
+                un tiers ou moins de ce qu'une personne valide est en mesure de gagner
+                en exerçant une profession sur le marché général du travail ;
+                b) soit son état de santé provoque un manque total d'autonomie ou une
+                réduction d'autonomie d'au moins 9 points, mesurés conformément aux
+                guide et échelle médico-sociale applicables dans le cadre de la
+                législation relative aux allocations aux handicapés ;
+                c) soit, après la période d'incapacité primaire prévue à l'article 87
+                de la loi coordonnée relative à l'assurance obligatoire soins de
+                santé et indemnités, sa capacité de gain est réduite à un tiers
+                ou moins comme prévu à l'article 100 de la même loi coordonnée ;
+                d) soit, par une décision administrative ou judiciaire, qu'il est
+                handicapé physiquement ou psychiquement ou en incapacité de travail
+                de façon permanente pour au moins 66 p.c.""",
+    )
+
     taxbe_isolated = fields.Boolean(
         string="Isolated",
         help="""le bénéficiaire des revenus est un isolé,
@@ -75,7 +100,7 @@ class HrTaxBeMixin(models.AbstractModel):
         """,
     )
 
-    taxbe_65_dependant = fields.Integer(
+    taxbe_dependant_65 = fields.Integer(
         string="65+ Dependant Persons",
         help="""Le bénéficiaire des revenus a à sa charge des personnes
         visées à l'article 136, 2° et 3°, CIR 92 qui sont dans une situation
@@ -91,7 +116,7 @@ class HrTaxBeMixin(models.AbstractModel):
         d'un autre Etat membre de l'Espace économique européen.""",
     )
 
-    taxbe_65 = fields.Integer(
+    taxbe_person_65 = fields.Integer(
         string="65+ Persons",
         help="""le bénéficiaire des revenus a à sa charge des personnes
         visées à l'article 136, 2° et 3°, CIR 92 qui ont atteint l’âge de
@@ -101,7 +126,7 @@ class HrTaxBeMixin(models.AbstractModel):
         La personne handicapée à charge est comptée pour deux.""",
     )
 
-    taxbe_other = fields.Integer(
+    taxbe_person_other = fields.Integer(
         string="Other Persons (-65)",
         help="""Le bénéficiaire des revenus a à sa charge des personnes
         visées à l'article 136, 2° à 4°, CIR 92 autres que celles visées
@@ -276,6 +301,63 @@ class HrTaxBeMixin(models.AbstractModel):
                 ]
 
     @api.model
+    def _get_annexe3_year(self, year):
+        match year:
+            case "2023":
+                return [0, 540, 1476, 3912, 6804, 9972, 13128, 16308, 19824]
+            case "2024":
+                return [0, 540, 1476, 3912, 6804, 9972, 13128, 16308, 19824]
+            case _:
+                return [0, 540, 1476, 3912, 6804, 9972, 13128, 16308, 19824]
+
+    @api.model
+    def _get_annexe3_sup_year(self, year):
+        match year:
+            case "2023":
+                return 3516.00
+            case "2024":
+                return 3516.00
+            case _:
+                return 3516.00
+
+    @api.model
+    def _get_annexe4_year(self, year):
+        match year:
+            case "2023":
+                return [
+                    144,  # 0 Isolé
+                    540,  # 1 Veuf - Pere/Mere celibataire
+                    540,  # 2 Handicapé
+                    1728,  # 3 A Charge > 65 ans dépendant
+                    1140,  # 4 A Charge > 65 ans
+                    540,  # 5 A Charge autre
+                    1578,  # 6 Conjoint à charge sans rev < plafond (263 net/mois)
+                    3150,  # 7 Conjoint à charge avec rev < plafond (525 net/mois)
+                ]
+            case "2024":
+                return [
+                    144,  # 0 Isolé
+                    540,  # 1 Veuf - Pere/Mere celibataire
+                    540,  # 2 Handicapé
+                    1728,  # 3 A Charge > 65 ans dépendant
+                    1140,  # 4 A Charge > 65 ans
+                    540,  # 5 A Charge autre
+                    1578,  # 6 Conjoint à charge sans rev < plafond (263 net/mois)
+                    3150,  # 7 Conjoint à charge avec rev < plafond (525 net/mois)
+                ]
+            case _:
+                return [
+                    144,  # 0 Isolé
+                    540,  # 1 Veuf - Pere/Mere celibataire
+                    540,  # 2 Handicapé
+                    1728,  # 3 A Charge > 65 ans dépendant
+                    1140,  # 4 A Charge > 65 ans
+                    540,  # 5 A Charge autre
+                    1578,  # 6 Conjoint à charge sans rev < plafond (263 net/mois)
+                    3150,  # 7 Conjoint à charge avec rev < plafond (525 net/mois)
+                ]
+
+    @api.model
     def _get_exempt_quotity_year(self, year):
         match year:
             case "2023":
@@ -405,12 +487,91 @@ class HrTaxBeMixin(models.AbstractModel):
         return income_tax_base
 
     @api.model
+    def _get_income_tax_reductions(
+        self,
+        year,
+        childrens=0,
+        childrens_hand=0,
+        isolated=False,
+        isolated_par=False,
+        handicap=False,
+        dependant_65=0,
+        person_65=0,
+        person_other=0,
+        spouse_low_rev=False,
+        spouse_low_pens=False,
+    ):
+        reduction = 0.00
+
+        # get parameters for the year
+        annexe3 = self._get_annexe3_year(year)
+        annexe3_sup = self._get_annexe3_sup_year(year)
+        annexe4 = self._get_annexe4_year(year)
+
+        # Children
+        if childrens < 9:
+            reduction += annexe3[childrens]
+        else:
+            reduction += annexe3[8] + annexe3_sup * (childrens - 8)
+
+        # Children with handicap
+        if childrens_hand < 9:
+            reduction += annexe3[(childrens_hand * 2)]
+        else:
+            reduction += annexe3[8] + annexe3_sup * ((childrens_hand * 2) - 8)
+
+        # Isolated
+        if isolated:
+            reduction += annexe4[0]
+
+        # Isolated Parent
+        if isolated_par:
+            reduction += annexe4[1]
+
+        # Handicap
+        if handicap:
+            reduction += annexe4[2]
+
+        # 65+ dependant people
+        if dependant_65 > 0:
+            reduction += annexe4[3] * dependant_65
+
+        # 65+ dependant people
+        if person_65 > 0:
+            reduction += annexe4[4] * person_65
+
+        # other people
+        if person_other > 0:
+            reduction += annexe4[5] * person_other
+
+        # Spouse with low revenue
+        if spouse_low_rev:
+            reduction += annexe4[6]
+
+        # Spouse with rent < thresold
+        if spouse_low_pens:
+            reduction += annexe4[7]
+
+        income_tax_reductions = self._round_amount_be(reduction)
+        return income_tax_reductions
+
+    @api.model
     def get_income_tax(
         self,
         taxable,
         year=datetime.date.today().year,
         taxbe_type="employee",
         spouse_without_revenue=False,
+        childrens=0,
+        childrens_hand=0,
+        isolated=False,
+        isolated_par=False,
+        handicap=False,
+        dependant_65=0,
+        person_65=0,
+        person_other=0,
+        spouse_low_rev=False,
+        spouse_low_pens=False,
     ):
 
         # Compute base income tax
@@ -419,11 +580,27 @@ class HrTaxBeMixin(models.AbstractModel):
         )
 
         # Compute reductions
-        income_tax_reduction = 0.00
+        income_tax_reduction = self._get_income_tax_reductions(
+            year,
+            childrens,
+            childrens_hand,
+            isolated,
+            isolated_par,
+            handicap,
+            dependant_65,
+            person_65,
+            person_other,
+            spouse_low_rev,
+            spouse_low_pens,
+        )
 
         # Compute income tax
-        income_tax = income_tax_base - income_tax_reduction
-        income_tax = income_tax / 12
+
+        income_tax = (income_tax_base - income_tax_reduction) / 12
         income_tax = self._round_amount_be(income_tax)
 
-        return -income_tax
+        # Income tax should be positive
+        if income_tax < 0:
+            income_tax = 0.00
+
+        return income_tax

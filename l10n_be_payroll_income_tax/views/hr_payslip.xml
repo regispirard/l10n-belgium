@@ -13,12 +13,13 @@
                 <group>
                     <field name="taxbe_type" />
                     <field name="taxbe_children" />
+                    <field name="taxbe_children_hand" />
                     <field name="taxbe_isolated" />
                     <field name="taxbe_isolated_par" />
                     <field name="taxbe_handicap" />
-                    <field name="taxbe_65_dependant" />
-                    <field name="taxbe_65" />
-                    <field name="taxbe_other" />
+                    <field name="taxbe_dependant_65" />
+                    <field name="taxbe_person_65" />
+                    <field name="taxbe_person_other" />
                     <field name="taxbe_spouse_without_rev" />
                     <field name="taxbe_spouse_low_rev" />
                     <field name="taxbe_spouse_low_pens" />

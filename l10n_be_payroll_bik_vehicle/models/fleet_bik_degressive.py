@@ -13,7 +13,7 @@ class FleetBikDegressive(models.Model):
     _sql_constraints = [
         (
             "month_min_max",
-            "month_max > month_min",
+            "CHECK(month_to > month_from)",
             "Month to should be greater than month from ",
         ),
     ]

@@ -281,7 +281,7 @@
     <field name="amount_select">code</field>
     <field
             name="amount_python_compute"
-        >result = categories.BE_NETTOT + categories.BE_TAXES + categories.BE_RECOVERY </field>
+        >result = categories.BE_NETTOT + categories.BE_RECOVERY </field>
   </record>
 
 
