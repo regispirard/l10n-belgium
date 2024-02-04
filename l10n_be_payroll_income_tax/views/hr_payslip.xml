@@ -8,21 +8,34 @@
         <field name="model">hr.payslip</field>
         <field name="inherit_id" ref="payroll_details.hr_payslip_view_form" />
         <field name="arch" type="xml">
-            <xpath expr="//page[@name='payslip_details']" position="inside">
-                <separator name="tax_income" string="Tax Income Data" />
-                <group>
-                    <field name="taxbe_type" />
-                    <field name="taxbe_children" />
-                    <field name="taxbe_children_hand" />
-                    <field name="taxbe_isolated" />
-                    <field name="taxbe_isolated_par" />
-                    <field name="taxbe_handicap" />
-                    <field name="taxbe_dependant_65" />
-                    <field name="taxbe_person_65" />
-                    <field name="taxbe_person_other" />
-                    <field name="taxbe_spouse_without_rev" />
-                    <field name="taxbe_spouse_low_rev" />
-                    <field name="taxbe_spouse_low_pens" />
+            <xpath expr="//group[@name='l10n_be_position_col1']" position="after">
+                <group col="2" name="l10n_be_fiscal_position_col2">
+                    <group string="Fiscal Position">
+                        <field name="taxbe_type" />
+                    </group>
+                </group>
+            </xpath>
+            <xpath expr="//group[@name='l10n_be_group1']" position="after">
+                <group col="2" name="l10n_be_group2">
+                    <group col="1" name="l10n_be_fiscal_reductions_col1">
+                        <group string="Fiscal Reductions">
+                            <field name="taxbe_isolated" />
+                            <field name="taxbe_isolated_par" />
+                            <field name="taxbe_handicap" />
+                            <field name="taxbe_children" />
+                            <field name="taxbe_children_hand" />
+                            <field name="taxbe_dependant_65" />
+                        </group>
+                    </group>
+                    <group col="2" name="l10n_be_fiscal_reductions_col2">
+                        <group string="Fiscal Reductions (2)">
+                            <field name="taxbe_person_65" />
+                            <field name="taxbe_person_other" />
+                            <field name="taxbe_spouse_without_rev" />
+                            <field name="taxbe_spouse_low_rev" />
+                            <field name="taxbe_spouse_low_pens" />
+                        </group>
+                    </group>
                 </group>
             </xpath>
         </field>

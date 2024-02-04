@@ -9,9 +9,12 @@
         <field name="inherit_id" ref="payroll_details.hr_payslip_view_form" />
         <field name="arch" type="xml">
             <xpath expr="//page[@name='payslip_details']" position="inside">
-                <separator name="social_security" string="Social Security Data" />
-                <group>
-                    <field name="onssbe_type" />
+                <group col="2" name="l10n_be_group1">
+                    <group col="1" name="l10n_be_position_col1">
+                        <group string="Social Security (ONSS)">
+                            <field name="onssbe_type" />
+                        </group>
+                    </group>
                 </group>
             </xpath>
         </field>

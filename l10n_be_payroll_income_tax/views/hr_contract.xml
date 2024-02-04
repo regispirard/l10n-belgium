@@ -4,16 +4,15 @@
 <odoo>
 
     <record id='hr_contract_view_form' model='ir.ui.view'>
-        <field name="name">hr.contract.form (in l10n_be_payroll_base)</field>
+        <field name="name">hr.contract.form (in l10n_be_payroll_income_tax)</field>
         <field name="model">hr.contract</field>
         <field name="inherit_id" ref="hr_contract.hr_contract_view_form" />
         <field name="arch" type="xml">
-            <xpath
-                expr="//group[@name='l10n_be_social_security_col2']"
-                position="inside"
-            >
-                <group string="Social Security (ONSS)">
-                    <field name="taxbe_type" />
+            <xpath expr="//group[@name='l10n_be_position_col1']" position="after">
+                <group col="2" name="l10n_be_position_col2">
+                    <group string="Fiscal Position">
+                        <field name="taxbe_type" />
+                    </group>
                 </group>
             </xpath>
         </field>
