@@ -191,38 +191,38 @@ class HrTaxBeMixin(models.AbstractModel):
     @api.model
     def _get_soc_plaf1(self, year):
         match year:
-            case "2022":
+            case 2022:
                 return 1210.00
-            case "2023":
+            case 2023:
                 return 1260.00
-            case "2024":
-                return 1260.00
+            case 2024:
+                return 1410.00
             case _:
-                return 1260.00
+                return 1410.00
 
     @api.model
     def _get_soc_amount1(self, year):
         match year:
-            case "2022":
+            case 2022:
                 return 335.00
-            case "2023":
+            case 2023:
                 return 345.00
-            case "2024":
-                return 345.00
+            case 2024:
+                return 375.00
             case _:
-                return 345.00
+                return 375.00
 
     @api.model
     def _get_soc_plaf2(self, year):
         match year:
-            case "2022":
+            case 2022:
                 return 5210.00
-            case "2023":
+            case 2023:
                 return 5440.00
-            case "2024":
-                return 5440.00
+            case 2024:
+                return 6090.00
             case _:
-                return 5440.00
+                return 6090.00
 
     @api.model
     def _get_soc_perc2(self, year):
@@ -231,14 +231,14 @@ class HrTaxBeMixin(models.AbstractModel):
     @api.model
     def _get_soc_plaf3(self, year):
         match year:
-            case "2022":
+            case 2022:
                 return 7670.00
-            case "2023":
+            case 2023:
                 return 8015.00
-            case "2024":
-                return 8015.00
+            case 2024:
+                return 8955.00
             case _:
-                return 8015.00
+                return 8955.00
 
     @api.model
     def _get_soc_perc3(self, year):
@@ -278,52 +278,85 @@ class HrTaxBeMixin(models.AbstractModel):
     @api.model
     def _get_annexe1_year(self, year):
         match year:
-            case "2023":
+            case 2023:
                 return [
+                    # Annual rev max, min, %, total
                     [15170, 0, 0.2675, 0.2675 * 15170],
                     [24260, 15170, 0.4280, 0.4280 * (24260 - 15170)],
                     [46340, 24260, 0.4815, 0.4815 * (46340 - 24260)],
                     [999999, 46340, 0.5350, 0],
                 ]
-            case "2024":
+            case 2024:
                 return [
-                    [15170, 0, 0.2675, 0.2675 * 15170],
-                    [24260, 15170, 0.4280, 0.4280 * (24260 - 15170)],
-                    [46340, 24260, 0.4815, 0.4815 * (46340 - 24260)],
-                    [999999, 46340, 0.5350, 0],
+                    # Annual rev max, min, %, total
+                    [15830, 0, 0.2675, 0.2675 * 15830],
+                    [27940, 15830, 0.4280, 0.4280 * (27940 - 15830)],
+                    [48350, 27940, 0.4815, 0.4815 * (48350 - 27940)],
+                    [999999, 48350, 0.5350, 0],
                 ]
             case _:
                 return [
-                    [15170, 0, 0.2675, 0.2675 * 15170],
-                    [24260, 15170, 0.4280, 0.4280 * (24260 - 15170)],
-                    [46340, 24260, 0.4815, 0.4815 * (46340 - 24260)],
-                    [999999, 46340, 0.5350, 0],
+                    # Annual rev max, min, %, total
+                    [15830, 0, 0.2675, 0.2675 * 15830],
+                    [27940, 15830, 0.4280, 0.4280 * (27940 - 15830)],
+                    [48350, 27940, 0.4815, 0.4815 * (48350 - 27940)],
+                    [999999, 48350, 0.5350, 0],
                 ]
 
     @api.model
     def _get_annexe3_year(self, year):
         match year:
-            case "2023":
-                return [0, 540, 1476, 3912, 6804, 9972, 13128, 16308, 19824]
-            case "2024":
-                return [0, 540, 1476, 3912, 6804, 9972, 13128, 16308, 19824]
+            case 2023:
+                return [
+                    0,  # 0 Kid
+                    540,  # 1 Kid
+                    1476,  # 2 Kids
+                    3912,  # 3 Kids
+                    6804,  # 4 Kids
+                    9972,  # 5 Kids
+                    13128,  # 6 Kids
+                    16308,  # 7 Kids
+                    19824,  # 8 Kids
+                ]
+            case 2024:
+                return [
+                    0,  # 0 Kid
+                    588,  # 1 Kid
+                    1572,  # 2 Kids
+                    4164,  # 3 Kids
+                    7212,  # 4 Kids
+                    10512,  # 5 Kids
+                    13812,  # 6 Kids
+                    17148,  # 7 Kids
+                    20808,  # 8 Kids
+                ]
             case _:
-                return [0, 540, 1476, 3912, 6804, 9972, 13128, 16308, 19824]
+                return [
+                    0,  # 0 Kid
+                    588,  # 1 Kid
+                    1572,  # 2 Kids
+                    4164,  # 3 Kids
+                    7212,  # 4 Kids
+                    10512,  # 5 Kids
+                    13812,  # 6 Kids
+                    17148,  # 7 Kids
+                    20808,  # 8 Kids
+                ]
 
     @api.model
     def _get_annexe3_sup_year(self, year):
         match year:
-            case "2023":
-                return 3516.00
-            case "2024":
-                return 3516.00
+            case 2023:
+                return 3516.00  # Supp. per kid (after 8 kids)
+            case 2024:
+                return 3660.00  # Supp. per kid (after 8 kids)
             case _:
-                return 3516.00
+                return 3660.00  # Supp. per kid (after 8 kids)
 
     @api.model
     def _get_annexe4_year(self, year):
         match year:
-            case "2023":
+            case 2023:
                 return [
                     144,  # 0 Isolé
                     540,  # 1 Veuf - Pere/Mere celibataire
@@ -334,54 +367,54 @@ class HrTaxBeMixin(models.AbstractModel):
                     1578,  # 6 Conjoint à charge sans rev < plafond (263 net/mois)
                     3150,  # 7 Conjoint à charge avec rev < plafond (525 net/mois)
                 ]
-            case "2024":
+            case 2024:
                 return [
-                    144,  # 0 Isolé
-                    540,  # 1 Veuf - Pere/Mere celibataire
-                    540,  # 2 Handicapé
-                    1728,  # 3 A Charge > 65 ans dépendant
-                    1140,  # 4 A Charge > 65 ans
-                    540,  # 5 A Charge autre
-                    1578,  # 6 Conjoint à charge sans rev < plafond (263 net/mois)
-                    3150,  # 7 Conjoint à charge avec rev < plafond (525 net/mois)
+                    0,  # 0 Isolé
+                    588,  # 1 Veuf - Pere/Mere celibataire
+                    588,  # 2 Handicapé
+                    1884,  # 3 A Charge > 65 ans dépendant
+                    1212,  # 4 A Charge > 65 ans
+                    588,  # 5 A Charge autre
+                    1650,  # 6 Conjoint à charge sans rev < plafond (263 net/mois)
+                    3288,  # 7 Conjoint à charge avec rev < plafond (525 net/mois)
                 ]
             case _:
                 return [
-                    144,  # 0 Isolé
-                    540,  # 1 Veuf - Pere/Mere celibataire
-                    540,  # 2 Handicapé
-                    1728,  # 3 A Charge > 65 ans dépendant
-                    1140,  # 4 A Charge > 65 ans
-                    540,  # 5 A Charge autre
-                    1578,  # 6 Conjoint à charge sans rev < plafond (263 net/mois)
-                    3150,  # 7 Conjoint à charge avec rev < plafond (525 net/mois)
+                    0,  # 0 Isolé
+                    588,  # 1 Veuf - Pere/Mere celibataire
+                    588,  # 2 Handicapé
+                    1884,  # 3 A Charge > 65 ans dépendant
+                    1212,  # 4 A Charge > 65 ans
+                    588,  # 5 A Charge autre
+                    1650,  # 6 Conjoint à charge sans rev < plafond (263 net/mois)
+                    3288,  # 7 Conjoint à charge avec rev < plafond (525 net/mois)
                 ]
 
     @api.model
     def _get_exempt_quotity_year(self, year):
         match year:
-            case "2023":
-                return 9620.00
-            case "2024":
-                return 9620.00
+            case 2023:
+                return 9620.00  # Exempted quotity
+            case 2024:
+                return 10580.00  # Exempted quotity
             case _:
-                return 9620.00
+                return 10580.00  # Exempted quotity
 
     @api.model
     def _get_pct_lump_sum(self, year, taxbe_type):
         if taxbe_type == "employee":
             match year:
-                case "2023":
+                case 2023:
                     return 0.3
-                case "2024":
+                case 2024:
                     return 0.3
                 case _:
                     return 0.3
         if taxbe_type == "leader":
             match year:
-                case "2023":
+                case 2023:
                     return 0.03
-                case "2024":
+                case 2024:
                     return 0.03
                 case _:
                     return 0.03
@@ -390,30 +423,30 @@ class HrTaxBeMixin(models.AbstractModel):
     def _get_max_lump_sum(self, year, taxbe_type):
         if taxbe_type == "employee":
             match year:
-                case "2023":
+                case 2023:
                     return 5510.00
-                case "2024":
-                    return 5510.00
+                case 2024:
+                    return 5750.00
                 case _:
-                    return 5510.00
+                    return 5750.00
         if taxbe_type == "leader":
             match year:
-                case "2023":
+                case 2023:
                     return 2910.00
-                case "2024":
-                    return 2910.00
+                case 2024:
+                    return 3030.00
                 case _:
-                    return 2910.00
+                    return 3030.00
 
     @api.model
     def _get_max_max_spouse_rev(self, year):
         match year:
-            case "2023":
+            case 2023:
                 return 12520.00
-            case "2024":
-                return 12520.00
+            case 2024:
+                return 13060.00
             case _:
-                return 12520.00
+                return 13060.00
 
     @api.model
     def _get_income_tax_base(
